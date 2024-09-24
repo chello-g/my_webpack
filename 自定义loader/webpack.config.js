@@ -14,11 +14,13 @@ module.exports = {
   mode: 'development',
   entry: resolve(__dirname, 'src/app.js'),
   output: {
+    clean: true,
     path: resolve(__dirname, 'dist'),
     filename: 'app.js'
   },
-  devtool: 'source-map',
+  // devtool: 'source-map',
   // 加载项目的所有loader路径, loader 默认在node_modules中查找, 也可指定目录如loaders
+  // 也可以直接npm install ./loaders/force-strict-loader -D直接安装到node_modules
   resolveLoader: {
     modules: ['node_modules', resolve(__dirname, 'loaders')]
   },
@@ -39,6 +41,11 @@ module.exports = {
             }
           }
         ]
+      },
+      {
+        test:/\.js$/,
+        use:'force-strict-loader',
+        exclude: /node_mosules/
       }
     ]
   },
